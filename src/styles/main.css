@@ -8,14 +8,14 @@ main {
 .field {
     display: flex; 
     flex-direction: column;
+    max-width: 600px;
+    min-width: 300px;
     margin-left: 35%;
-    margin-right: 35%;
     margin-bottom: 40px; 
 }
 
 .radio {
     margin-left: 35%;
-    margin-right: 35%;
     margin-bottom: 40px; 
     font-size: 14px; 
 }
@@ -25,11 +25,11 @@ main {
     
 }
 
-.letters {
+/* .letters {
     margin-left: 35%;
     margin-bottom: 40px; 
     resize: none; 
-}
+} */
 
 .button {
     margin-left: 35%;
@@ -48,15 +48,8 @@ h1 {
     font-size: 12px; 
 }
 
-.label {
 
-}
-
-#topicStyle {
-   
-}
-
-#topicText {
+.topicText {
     font-size: 12px; 
     width:fit-content;
     padding-right: 15px;
@@ -69,4 +62,10 @@ h1 {
 
 i {
     font-size: 12px; 
+}
+
+.letterOutput {
+    margin-left: 35%;
+    margin-bottom: 40px; 
+    resize: none;
 }

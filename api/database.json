@@ -1,15 +1,6 @@
 {
-  "requests": [
-    {
-      "author": "Tolkien",
-      "authorEmail": "tolkien@gmail.com",
-      "letter": "I love your fantasy novels. ",
-      "topic": "Friendly",
-      "recipient": "Jacob",
-      "recipientEmail": "jacob@gmail.com",
-      "id": 1
-    }
-  ],
+  "requests": [],
+  "requestTopics": [],
   "authors": [
     {
       "id": 1,
@@ -80,6 +71,5 @@
       "name": "Ramiro",
       "email": "ramiro@gmail.com"
     }
-  ],
-  "transient": {}
+  ]
 }

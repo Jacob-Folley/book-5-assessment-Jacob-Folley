@@ -1,5 +1,5 @@
 import { penpal } from "./penpal.js"
-import { fetchRequestAuthors, fetchRequestTopics, fetchRequestRecipients, fetchRequestRequests } from "./dataAccess.js"
+import { fetchRequestAuthors, fetchRequestTopics, fetchRequestRecipients, fetchRequestRequests, fetchRequestTopicRequests } from "./dataAccess.js"
 
 
 
@@ -28,6 +28,10 @@ const render = () => {
     ).then(
         () => {
             return fetchRequestRequests()
+        }
+    ).then(
+        () => {
+            return fetchRequestTopicRequests()
         }
     ).then(
         () => {

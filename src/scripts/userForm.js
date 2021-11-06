@@ -1,6 +1,6 @@
-import { sendRequest } from "./dataAccess.js"
+import { sendLetters } from "./dataAccess.js"
 import { getAuthors, getTopics, getRecipients } from "./dataAccess.js"
-import { setAuthor, setTopic, setRecipient, setRecipientEmail, setAuthorEmail } from "./dataAccess.js"
+import { setAuthor, setTopic, setRecipient } from "./dataAccess.js"
 import { getTransientState } from "./dataAccess.js"
 
 const mainContainer = document.querySelector("#container")
@@ -19,7 +19,7 @@ export const UserForm = () => {
             <select name="author" id="author"> 
             <option/>Choose Author...</option>`
     for (const author of authors) {
-        html += `<option value="${author.name}" Sacks"/>${author.name}</option>`
+        html += `<option value="${author.id}">${author.name}</option>`
     }      
     html += `</select>
     </div>`   
@@ -27,13 +27,13 @@ export const UserForm = () => {
     html += `       
         <div class="field">
             <label class="label" for="letter">Letter</label>
-            <textarea name="letter" class="input" /></textarea>
+            <textarea name="letter" class="input"></textarea>
         </div> `
 
     html += `<div class="radio">`
 
     for (const topic of topics) {
-        html += `<input type="radio" value="${topic.name}" name="topic" id="${topic.id}" /><label class="label" for="${topic.name}">${topic.name}</label>`
+        html += `<input type="checkbox" value="${topic.id}" name="topic" id="${topic.id}"> ${topic.name}`
     }
         
      html += "</div>"      
@@ -44,7 +44,8 @@ export const UserForm = () => {
             <option/>Choose Recipients...</option>`
 
     for (const recipient of recipients) {
-        html += `<option value="${recipient.name}"/>${recipient.name}</option>`
+        html += `<option value="${recipient.id}">${recipient.name}</option>`
+        
     }
         
     html += ` </select>
@@ -60,39 +61,49 @@ document.addEventListener(
     (event) => {
         const authors = getAuthors()
         if (event.target.name === "author") {
-            setAuthor(event.target.value)
+            setAuthor(parseInt(event.target.value))
         }
-        for (const author of authors) {
-            if (author.name === event.target.value) {
-                setAuthorEmail(author.email)
-            }
-        }
+        // for (const author of authors) {
+        //     if (author.id === event.target.value) {
+        //         setAuthorEmail(author.email)
+        //     }
+        // }
 
     }
 )
 
 document.addEventListener(
-    "change",
-    (event) => {
-        if (event.target.name === "topic") {
-            setTopic(event.target.value)
-        }
+    "click",
+    evt => {
+        if (evt.target.type === "checkbox") {
+            const topic = evt.target.value
 
+            setTopic(parseInt(topic))
+        }
     }
 )
+
+// document.addEventListener(
+//     "change",
+//     (event) => {
+//         if (event.target.name === "topic") {
+//             setTopic(event.target.value)
+//         }
+//     }
+// )
 
 document.addEventListener(
     "change",
     (event) => {
         const recipients = getRecipients()
         if (event.target.name === "recipient") {
-            setRecipient(event.target.value)
+            setRecipient(parseInt(event.target.value))
         }
-        for (const recipient of recipients) {
-            if (recipient.name === event.target.value) {
-                setRecipientEmail(recipient.email)
-            }
-        }
+        // for (const recipient of recipients) {
+        //     if (recipient.name === event.target.value) {
+        //         setRecipientEmail(recipient.email)
+        //     }
+        // }
     }
 )
 
@@ -101,25 +112,19 @@ mainContainer.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "submitRequest") {
         // Get what the user typed into the form fields
         const transient = getTransientState()
-        const userAuthor = transient.authorName
-        const userAuthorEmail = transient.authorEmail
+        const userAuthor = transient.authorId
         const userLetter = document.querySelector("textarea[name='letter']").value
-        const userTopic = transient.topicName
-        const userRecipient = transient.recipientName
-        const userRecipientEmail = transient.recipientEmail
+        const userRecipient = transient.recipientId
 
 
         // Make an object out of the user input
         const dataToSendToAPI = {
             author: userAuthor,
-            authorEmail: userAuthorEmail,
             letter: userLetter,
-            topic: userTopic,
             recipient: userRecipient,
-            recipientEmail: userRecipientEmail
         }
 
         // Send the data to the API for permanent storage
-        sendRequest(dataToSendToAPI)
+        sendLetters(dataToSendToAPI)
     }
 })

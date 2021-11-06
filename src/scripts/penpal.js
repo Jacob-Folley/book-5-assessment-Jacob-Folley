@@ -12,7 +12,6 @@ export const penpal = () => {
         <section>
             <h1>Letters</h1>
             ${Requests()}
-            </section>
-
+        </section>
     `
 }
