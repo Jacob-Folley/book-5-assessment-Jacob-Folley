@@ -1,6 +1,24 @@
 {
-  "requests": [],
-  "requestTopics": [],
+  "requests": [
+    {
+      "author": 2,
+      "letter": "hgdhg",
+      "recipient": 2,
+      "id": 1
+    }
+  ],
+  "requestTopics": [
+    {
+      "topicId": 1,
+      "requestId": 1,
+      "id": 1
+    },
+    {
+      "topicId": 2,
+      "requestId": 1,
+      "id": 2
+    }
+  ],
   "authors": [
     {
       "id": 1,

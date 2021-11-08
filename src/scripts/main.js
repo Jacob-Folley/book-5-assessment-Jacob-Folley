@@ -11,33 +11,40 @@ export const mainContainer = document.querySelector("#container")
 mainContainer.addEventListener(
     "stateChanged",
     customEvent => {
+        // Renders the document if state is changed
         render()
     }
 )
 
 // Renders the whole page
 const render = () => {
+    // retrieves permanent api Data
     fetchRequestAuthors().then(
         () => {
+            // Gets the Topics
             return fetchRequestTopics()
         }
     ).then(
         () => {
+            // Gets the Recipients
             return fetchRequestRecipients()
         }
     ).then(
         () => {
+            // Gets the Requests
             return fetchRequestRequests()
         }
     ).then(
         () => {
+            // Get the topic Requests
             return fetchRequestTopicRequests()
         }
     ).then(
         () => {
+            // Sets the HTML to the value of the penpal function
             mainContainer.innerHTML = penpal()
         }
-       )
+    )
 }
 
 render()
